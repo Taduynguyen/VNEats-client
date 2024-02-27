@@ -1,4 +1,7 @@
 import landing from '../assets/landing.png';
+import mylanding from '../assets/mylanding.png';
+
+
 import appDownload from '../assets/appDownload.png'
 
 const HomePage = () => {
@@ -12,7 +15,7 @@ const HomePage = () => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-5">
-                <img src={landing} />
+                <img src={mylanding} />
                 <div className="flex flex-col items-center justify-center gap-4 text-center">
                     <span className="font-bold text-3xl tracking-tighter">
                         Order take away even faster!
