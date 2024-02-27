@@ -1,8 +1,40 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { toast } from "sonner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+export const useGetUser = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
+  const getUserRequest = async () => {
+    const accessToken = await getAccessTokenSilently();
+
+    const respone = await fetch(`${API_BASE_URL}/user`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!respone.ok) throw new Error("Failed to get user");
+
+    return respone.json();
+  };
+
+  const {
+    data: currentUser,
+    isLoading,
+    error,
+  } = useQuery("fetchCurrentUser", getUserRequest);
+
+  if (error) {
+    toast.error(error.toString());
+  }
+
+  return { currentUser, isLoading };
+};
 
 type CreateUserRequest = {
   auth0Id: string;
@@ -85,5 +117,5 @@ export const useUpdateUser = () => {
   return {
     updateUser,
     isLoading,
-  }
+  };
 };
