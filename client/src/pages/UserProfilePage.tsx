@@ -6,9 +6,11 @@ const UserProfilePage = () => {
     const { currentUser, isLoading: isGetLoading} = useGetUser();
     const { updateUser, isLoading: isUpdateLoading } = useUpdateUser();
 
-    if (isGetLoading) return <span>Loading....</span>
+    if (isGetLoading) return <span>Loading....</span>;
 
- return <UserProfileForm onSave={updateUser} isLoading={isUpdateLoading} />
+    if (!currentUser) return <span>Unable to load profile</span>;
+
+ return <UserProfileForm currentUser={currentUser} onSave={updateUser} isLoading={isUpdateLoading} />
 }
 
 export default UserProfilePage;
