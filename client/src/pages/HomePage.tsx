@@ -1,4 +1,3 @@
-import landing from '../assets/landing.png';
 import mylanding from '../assets/mylanding.png';
 
 
