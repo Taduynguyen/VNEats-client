@@ -6,8 +6,8 @@ const Footer = () => {
                     VNEats.com
                 </span>
                 <span className="text-white font-bold tracking-tight flex gap-4">
-                    <span>Privacy Policy</span>
-                    <span>Terms of Service</span>
+                    <span>Chính sách bảo mật</span>
+                    <span>Điều khoản</span>
                 </span>
             </div>
         </div>

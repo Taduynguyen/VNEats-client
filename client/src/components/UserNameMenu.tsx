@@ -22,7 +22,7 @@ const UserNameMenu = () => {
       <DropdownMenuContent>
         <DropdownMenuItem>
           <Link to="/user-profile" className="font-bold hover:text-orange-500">
-            User Profile
+            Thông tin cá nhân
           </Link>
         </DropdownMenuItem>
         <Separator />
@@ -31,7 +31,7 @@ const UserNameMenu = () => {
             onClick={() => logout()}
             className="flex flex-1 font-bold bg-orange-500"
           >
-            Log Out
+            Đăng xuất
           </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>

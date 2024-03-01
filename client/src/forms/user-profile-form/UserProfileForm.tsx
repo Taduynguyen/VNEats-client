@@ -18,10 +18,10 @@ import { z } from "zod";
 
 const formSchema = z.object({
   email: z.string().optional(),
-  name: z.string().min(1, "Name is required"),
-  addressLine1: z.string().min(1, "AddressLine1 is required"),
-  city: z.string().min(1, "City is required"),
-  country: z.string().min(1, "Country is required"),
+  name: z.string().min(1, "Vui lòng nhập vào tên của bạn"),
+  addressLine1: z.string().min(1, "Vui lòng nhập vào số nhà"),
+  city: z.string().min(1, "Vui lòng nhập vào thành phố"),
+  country: z.string().min(1, "Vui lòng nhập vào tỉnh"),
 });
 
 type UserFormData = z.infer<typeof formSchema>;
@@ -48,9 +48,9 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
         className="space-y-4 bg-gray-400 rounded-lg md:p-10"
       >
         <div>
-          <h2 className="text-2xl font-bold">User Profile Form</h2>
+          <h2 className="text-2xl font-bold">Thông tin cá nhân</h2>
           <FormDescription className="font-bold">
-            View and change your profile information here
+            Theo dõi và thay đổi thông tin của bạn tại đây
           </FormDescription>
         </div>
         <FormField
@@ -70,7 +70,7 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Tên</FormLabel>
               <FormControl>
                 <Input {...field} className="bg-white" />
               </FormControl>
@@ -85,7 +85,7 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
             name="addressLine1"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Address Line 1</FormLabel>
+                <FormLabel>Số nhà</FormLabel>
                 <FormControl>
                   <Input {...field} className="bg-white" />
                 </FormControl>
@@ -99,7 +99,7 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
             name="city"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>City</FormLabel>
+                <FormLabel>Thành Phố</FormLabel>
                 <FormControl>
                   <Input {...field} className="bg-white" />
                 </FormControl>
@@ -113,7 +113,7 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
             name="country"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Country</FormLabel>
+                <FormLabel>Tỉnh</FormLabel>
                 <FormControl>
                   <Input {...field} className="bg-white" />
                 </FormControl>
@@ -127,7 +127,7 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
           <LoadingButton />
         ) : (
           <Button type="submit" className="bg-orange-500">
-            Submit
+            Đồng ý
           </Button>
         )}
       </form>

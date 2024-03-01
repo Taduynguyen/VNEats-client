@@ -8,7 +8,7 @@ const UserProfilePage = () => {
 
     if (isGetLoading) return <span>Loading....</span>;
 
-    if (!currentUser) return <span>Unable to load profile</span>;
+    if (!currentUser) return <span>Không thể tải được trang thông tin cá nhân</span>;
 
  return <UserProfileForm currentUser={currentUser} onSave={updateUser} isLoading={isUpdateLoading} />
 }
