@@ -109,7 +109,7 @@ export const useUpdateUser = () => {
     reset,
   } = useMutation(updateUserRequest);
 
-  if (isSuccess) toast.success("User profile updated!");
+  if (isSuccess) toast.success("Thông tin của bạn đã được cập nhật!");
   if (error) {
     toast.error(error.toString());
     reset();
