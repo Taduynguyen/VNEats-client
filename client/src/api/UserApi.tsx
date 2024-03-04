@@ -19,7 +19,7 @@ export const useGetUser = () => {
       },
     });
 
-    if (!respone.ok) throw new Error("Failed to get user");
+    if (!respone.ok) throw new Error("Không thành công");
 
     return respone.json();
   };
@@ -56,7 +56,7 @@ export const useCreateUser = () => {
       body: JSON.stringify(user),
     });
 
-    if (!response.ok) throw new Error("Failed to create user!");
+    if (!response.ok) throw new Error("Không thành công!");
   };
 
   const {
@@ -96,7 +96,7 @@ export const useUpdateUser = () => {
       body: JSON.stringify(formData),
     });
 
-    if (!response.ok) throw new Error("Failed to update user");
+    if (!response.ok) throw new Error("Không thành công");
 
     return response.json();
   };
