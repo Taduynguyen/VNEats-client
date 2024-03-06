@@ -12,38 +12,44 @@ import { Button } from "@/components/ui/button";
 import { Restaurant } from "@/types";
 import { useEffect } from "react";
 
-const formSchema = z.object({
-  restaurantName: z.string({
-    required_error: "Vui lòng nhập vào tên nhà hàng",
-  }),
-  city: z.string({
-    required_error: "Vui lòng nhập vào thành phố",
-  }),
-  country: z.string({
-    required_error: "Vui lòng nhập vào tỉnh",
-  }),
-  deliveryPrice: z.coerce.number({
-    required_error: "Vui lòng nhập vào phí giao hàng",
-    invalid_type_error: "Hãy nhập vào một số",
-  }),
-  estimatedDeliveryTime: z.coerce.number({
-    required_error: "Vui lòng nhập vào thời gian giao hàng",
-    invalid_type_error: "Hãy nhập vào một số",
-  }),
-  cuisines: z.array(z.string()).nonempty({
-    message: "Vui lòng chọn ít nhất 1 lĩnh vực",
-  }),
-  menuItems: z.array(
-    z.object({
-      name: z.string().min(1, "Vui lòng nhập vào tên món"),
-      price: z.coerce.number({
-        required_error: "Vui lòng nhập vào thời giá",
-        invalid_type_error: "Hãy nhập vào một số",
-      }),
-    })
-  ),
-  imageFile: z.instanceof(File, { message: "Hãy thêm vào ảnh" }),
-});
+const formSchema = z
+  .object({
+    restaurantName: z.string({
+      required_error: "Vui lòng nhập vào tên nhà hàng",
+    }),
+    city: z.string({
+      required_error: "Vui lòng nhập vào thành phố",
+    }),
+    country: z.string({
+      required_error: "Vui lòng nhập vào tỉnh",
+    }),
+    deliveryPrice: z.coerce.number({
+      required_error: "Vui lòng nhập vào phí giao hàng",
+      invalid_type_error: "Hãy nhập vào một số",
+    }),
+    estimatedDeliveryTime: z.coerce.number({
+      required_error: "Vui lòng nhập vào thời gian giao hàng",
+      invalid_type_error: "Hãy nhập vào một số",
+    }),
+    cuisines: z.array(z.string()).nonempty({
+      message: "Vui lòng chọn ít nhất 1 lĩnh vực",
+    }),
+    menuItems: z.array(
+      z.object({
+        name: z.string().min(1, "Vui lòng nhập vào tên món"),
+        price: z.coerce.number({
+          required_error: "Vui lòng nhập vào thời giá",
+          invalid_type_error: "Hãy nhập vào một số",
+        }),
+      })
+    ),
+    imageUrl: z.string().optional(),
+    imageFile: z.instanceof(File, { message: "Hãy thêm vào ảnh" }).optional(),
+  })
+  .refine((data) => data.imageUrl || data.imageFile, {
+    message: "Hãy thêm vào đường dẫn ảnh hoặc file ảnh",
+    path: ["imageFile"],
+  });
 
 type RestaurantFormData = z.infer<typeof formSchema>;
 
@@ -64,7 +70,7 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant }: Props) => {
 
   useEffect(() => {
     if (!restaurant) return;
-    
+
     form.reset(restaurant);
   }, [form, restaurant]);
 
@@ -88,10 +94,10 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant }: Props) => {
       formData.append(`menuItems[${index}][price]`, item.price.toString());
     });
 
-    formData.append("imageFile", formDataJson.imageFile);
-
+    if (formDataJson.imageFile) {
+      formData.append("imageFile", formDataJson.imageFile);
+    }
     onSave(formData);
-    console.log(formData);
   };
 
   return (

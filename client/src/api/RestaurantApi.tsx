@@ -68,3 +68,38 @@ export const useCreateRestaurant = () => {
 
   return { createRestaurant, isLoading };
 };
+
+export const useUpdateRestaurant = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
+  const updateRestaurantRequest = async (
+    restaurantFormData: FormData
+  ): Promise<Restaurant> => {
+    const accessToken = await getAccessTokenSilently();
+
+    const respone = await fetch(`${API_BASE_URL}/restaurant`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: restaurantFormData,
+    });
+
+    if (!respone.ok) throw new Error("Không thành công!");
+
+    return respone.json();
+  };
+
+  const {
+    mutate: updateRestaurant,
+    isLoading,
+    error,
+    isSuccess,
+  } = useMutation(updateRestaurantRequest);
+
+  if (isSuccess) toast.success("Cập nhật thông tin nhà hàng thành công");
+
+  if (error) toast.error("Không thành công!");
+
+  return { updateRestaurant, isLoading };
+};
