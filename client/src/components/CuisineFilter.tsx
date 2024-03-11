@@ -35,7 +35,7 @@ const CuisineFilter = ({
           onClick={handleCuisinesReset}
           className="text-sm font-semibold mb-2 underline cursor-pointer text-blue-500"
         >
-          Làm mới
+          Bỏ chọn
         </div>
       </div>
 
