@@ -16,7 +16,6 @@ const SearchResultInfo = ({ total, city }: Props) => {
           Tìm kiếm ở nơi khác
         </Link>
       </span>
-      Insert sort dropdown here
     </div>
   );
 };
