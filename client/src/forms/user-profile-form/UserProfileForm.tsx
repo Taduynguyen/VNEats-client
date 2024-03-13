@@ -24,14 +24,22 @@ const formSchema = z.object({
   country: z.string().min(1, "Vui lòng nhập vào tỉnh"),
 });
 
-type UserFormData = z.infer<typeof formSchema>;
+export type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
   onSave: (userProfileData: UserFormData) => void;
   isLoading: boolean;
   currentUser: User;
+  title?: string;
+  buttonText?: string;
 };
-const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
+const UserProfileForm = ({
+  currentUser,
+  onSave,
+  isLoading,
+  title = "Thông tin cá nhân",
+  buttonText = "Đồng ý",
+}: Props) => {
   const form = useForm<UserFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: currentUser,
@@ -39,7 +47,7 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
 
   useEffect(() => {
     form.reset(currentUser);
-  }, [currentUser, form])
+  }, [currentUser, form]);
 
   return (
     <Form {...form}>
@@ -48,9 +56,9 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
         className="space-y-4 bg-gray-400 rounded-lg md:p-10"
       >
         <div>
-          <h2 className="text-2xl font-bold">Thông tin cá nhân</h2>
+          <h2 className="text-2xl font-bold">{title}</h2>
           <FormDescription className="font-bold">
-            Theo dõi và thay đổi thông tin của bạn tại đây
+            Theo dõi và thay đổi thông tin của bạn
           </FormDescription>
         </div>
         <FormField
@@ -127,7 +135,7 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
           <LoadingButton />
         ) : (
           <Button type="submit" className="bg-orange-500">
-            Đồng ý
+            {buttonText}
           </Button>
         )}
       </form>
