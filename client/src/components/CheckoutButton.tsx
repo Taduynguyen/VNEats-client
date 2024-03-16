@@ -11,9 +11,10 @@ import { useGetUser } from "@/api/UserApi";
 type Props = {
   onCheckout: (userFormData: UserFormData) => void;
   disabled: boolean;
+  isLoading: boolean;
 };
 
-const CheckoutButton = ({ onCheckout, disabled }: Props) => {
+const CheckoutButton = ({ onCheckout, disabled, isLoading }: Props) => {
   const {
     isAuthenticated,
     isLoading: isAuthLoading,
@@ -40,7 +41,7 @@ const CheckoutButton = ({ onCheckout, disabled }: Props) => {
     );
   }
 
-  if (isAuthLoading || !currentUser) return <LoadingButton />;
+  if (isAuthLoading || !currentUser || isLoading) return <LoadingButton />;
 
   return (
     <Dialog>
@@ -55,7 +56,7 @@ const CheckoutButton = ({ onCheckout, disabled }: Props) => {
           onSave={onCheckout}
           isLoading={isGetUserLoading}
           title="Xác nhận thông tin đặt hàng"
-          buttonText="Đi đến thanh toán"
+          buttonText="Tiến hành thanh toán"
         />
       </DialogContent>
     </Dialog>
