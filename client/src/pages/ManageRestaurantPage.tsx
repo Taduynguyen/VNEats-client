@@ -16,7 +16,7 @@ const ManageRestaurantPage = () => {
   const { updateRestaurant, isLoading: isUpdateLoading } =
     useUpdateRestaurant();
 
-  const { orders, isLoading: getRestaurantOrderLoading } =
+  const { orders, isLoading: isGetRestaurantOrderLoading } =
     useGetRestaurantOrder();
 
   const isEditing = !!restaurant;
@@ -41,7 +41,7 @@ const ManageRestaurantPage = () => {
         <ManageRestaurantForm
           restaurant={restaurant}
           onSave={isEditing ? updateRestaurant : createRestaurant}
-          isLoading={isCreateLoading || isUpdateLoading}
+          isLoading={isCreateLoading || isUpdateLoading || isGetRestaurantOrderLoading}
         />
       </TabsContent>
     </Tabs>
