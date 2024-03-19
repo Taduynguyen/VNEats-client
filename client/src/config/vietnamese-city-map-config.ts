@@ -1,4 +1,4 @@
-export const vietnameseCityMap: Record<string, string> = {
+export const VIETNAMESE_CITY_MAP: Record<string, string> = {
     "bien hoa": "Biên Hòa",
     "sai gon": "Sài Gòn",
     "da nang": "Đà Nẵng",

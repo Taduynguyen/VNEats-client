@@ -1,10 +1,10 @@
 import { Restaurant } from "@/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { vietnameseCityMap } from "@/vietnameseCityMap";
+import { VIETNAMESE_CITY_MAP } from "@/config/vietnamese-city-map-config";
 import { Dot } from "lucide-react";
 
 const convertToVietnamese = (city: string): string => {
-  const vietnameseCity = vietnameseCityMap[city.toLowerCase()];
+  const vietnameseCity = VIETNAMESE_CITY_MAP[city.toLowerCase()];
   return vietnameseCity || city;
 };
 
